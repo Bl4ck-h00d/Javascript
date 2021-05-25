@@ -8,10 +8,13 @@ var – is an old-school variable declaration. Normally we don’t use it at all
 
 const – is like let, but the value of the variable can’t be changed.
 
+------------------------------------------------------------------------------------
 
 The var keyword is almost the same as let. It also declares a variable, but in a slightly different, “old-school” way.
 
-
+var vs let-
+https://javascript.info/var
+----------------------------------------------------------
 A variable should be declared only once.
 
 A repeated declaration of the same variable is an error:
@@ -23,7 +26,6 @@ A repeated declaration of the same variable is an error:
     let message = "That"; // SyntaxError: 'message' has already been declared
 
 
-var vs let-
-https://javascript.info/var
+
 
 
