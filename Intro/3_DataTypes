@@ -1,0 +1,78 @@
+A value in JavaScript is always of a certain type. For example, a string or a number.
+
+
+
+Primitive types
+    undefined
+    null
+    String
+    Boolean
+    Number
+    
+null
+    Data type
+    Value of nothing
+
+
+undefined
+    Data type
+    If a variable is declared, but not assigned, then its value is undefined:
+    Absence of value, meaning nothing is assigned to a variable.
+
+NaN
+    Number type
+    Not a number
+    'Hello' % 10 => NaN
+        -Type coercion converts Hello to number, 
+    
+----------------------------------------------------------------------------------
+
+Strings
+In JavaScript, there are 3 types of quotes.
+
+Double quotes: "Hello".
+Single quotes: 'Hello'.
+Backticks: `Hello`.
+Double and single quotes are “simple” quotes. There’s practically no difference between them in JavaScript.
+
+Backticks are “extended functionality” quotes. They allow us to embed variables and expressions into a string by wrapping them in ${…}, for example:
+
+let str = "Hello";
+let str2 = 'Single quotes are ok too';
+let phrase = `can embed another ${str}`;
+
+
+------------------------------------------------------------------------------------
+
+Objects- 
+
+The object type is special.
+
+All other types are called “primitive” because their values can contain only a single thing (be it a string or a number or whatever). In contrast, objects are used to store collections of data and more complex entities.
+
+--------------------------------------------------------------------------------------
+
+typeof Operator
+
+The typeof operator returns the type of the argument. It’s useful when we want to process values of different types differently or just want to do a quick check.
+
+It supports two forms of syntax:
+
+As an operator: typeof x.
+As a function: typeof(x).
+In other words, it works with parentheses or without them. The result is the same.
+
+The call to typeof x returns a string with the type name:
+
+typeof undefined // "undefined"
+
+typeof 0 // "number"
+
+typeof 10n // "bigint"
+
+typeof true // "boolean"
+
+typeof "foo" // "string"
+
+
+For null returns "object" – this is an error in the language, it’s not actually an object.
