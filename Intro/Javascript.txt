@@ -1,0 +1,22 @@
+Javascript is a dynamic, weakly typed programming language which is compiled at run time. It can be executed as part of a webpage in a browser or directly on any machine(host environment).
+
+Js was created to make webpages more dynamic. 
+
+It is interpreted language.
+
+How is JavaScript executed?
+
+code--------> JavaScript Engine (V8 in chrome)-----> effect on web page
+
+
+javascript engine->
+    - Parse code 
+    - Compile to machine language
+    - execute machine code 
+-> It happens on a single thread 
+
+dynamic -> Not precompiled instead parsed and compiled on the fly. Code is evaluted and executed at run time. 
+
+weakly typed -> data types are assumed automatically. we dont define data types.
+
+Javascript runs on a host environment. e.g- browser-side, server-side.  
