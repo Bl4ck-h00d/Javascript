@@ -65,9 +65,21 @@ alert(user["likes birds"]); // true
 // delete
 delete user["likes birds"];
 
+
+//Note - We can also use "non-negative numbers" as keys 
+let user = {
+  name: "John",
+  age: 30,
+  "likes birds": true,  // multiword property name must be quoted
+  1.5: "hello"
+
+};
+
+alert(user[1.5]) 
+
 //--------------------------------------------------------------------------------------------------------
 
-// Computed properties
+// Computed properties / Dynamically setting properties
 // We can use square brackets in an object literal, when creating an object. That’s called computed properties.
 
 // For instance:
@@ -80,7 +92,7 @@ let bag = {
 
 alert( bag.apple ); // 5 if fruit="apple"
 
-// The meaning of a computed property is simple: [fruit] means that the property name should be taken from fruit.
+// The meaning of a computed property is simple: [fruit] means that the property name should be taken from fruit variable.
 
 // So, if a visitor enters "apple", bag will become {apple: 5}.
 
