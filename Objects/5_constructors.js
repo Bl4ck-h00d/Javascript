@@ -91,3 +91,19 @@ function BigUser() {
   }
   
   alert( new BigUser().name );  // Godzilla, got that object
+
+
+  //--------------------------------------------------------------------------------------------------------------------------------
+
+  //We can not add a new property to an existing object constructor:
+
+  function Person(first, last, age, eyecolor) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eyecolor;
+  }
+
+  Person.nationality = "English";// -> WRONG
+
+  // To add a new property to a constructor, you must add it to the constructor function:
