@@ -173,14 +173,22 @@ let results = arr.filter(function(item, index, array) {
 
 // indexOf/lastIndexOf(item, pos) – look for item starting from position pos, return the index or -1 if not found.
 // includes(value) – returns true if the array has value, otherwise false.
-// find/filter(func) – filter elements through the function, return first/all values that make it return true.
+
 // findIndex is like find, but returns the index instead of a value.
 // To iterate over elements:
 
+
+
+// IMPORTANT------------------------------------------------
+//func---->  function(item, index, array){}
+
+
+// find/filter(func) – filter elements through the function, return first/all values that make it return true.
 // forEach(func) – calls func for every element, does not return anything.
 // To transform the array:
-
 // map(func) – creates a new array from results of calling func for every element.
 // sort(func) – sorts the array in-place, then returns it.
+// ---------------------------------------------------------------------
+
 // reverse() – reverses the array in-place, then returns it.
 // split/join – convert a string to array and back.

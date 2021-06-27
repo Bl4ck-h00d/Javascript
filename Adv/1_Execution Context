@@ -1,0 +1,83 @@
+Everything in JS happens inside the execution context. Imagine a sealed-off container inside which JS runs.
+
+
+Variable Environment     Thread of execution
+-------------------------------------
+        Memory    |  Code
+-------------------------------------
+| key:value       |                  |
+|                 |                  |
+|   a:10          |                  | 
+|   func: {...}   |                  |
+|   b:20          |         CODE     |
+|   func1: {...}  |                  |
+|                 |                  |
+|                 |                  |
+|                 |                  |
+|                 |                  |
+|                 |                  |
+--------------------------------------
+
+In the container the first component is ==memory component== and the 2nd one is code component
+
+Memory component has all the variables and functions in key value pairs. It is also called ==variable environment==.
+
+Code component is the place where code is executed one line at a time. It is also called the ==Thread of Execution==.
+
+JS is a ==synchronous, single-threaded language==
+
+Synchronous: one command at a time (?). follows a particular order of execution. That is, it goes from one line of code to the next and then to the next. It can't skip any, or jump to previous one.
+
+Single-threaded: Execution happens on a single thread only.A thread is a path of execution within a process. A process can contain multiple threads. more reading(https://stackoverflow.com/questions/5201852/what-is-a-thread-really)
+
+
+Code Execution:
+
+When a JS program is ran, a ==global== execution context is created.
+
+The execution context is created in two phases. The creation phase/ memory creation phase and code execution phase.
+
+In the first phase (memory creation), JS will allocate memory to variables and functions.(Variable Environment)
+
+eg-
+
+var n = 2;
+
+function square(num) {
+ var ans = num * num;
+ return ans;
+}
+
+var square2 = square(n);
+var square4 = square(4);
+
+
+
+------------------------------------------
+        Memory        |  Code
+------------------------------------------
+| key:value           |                  |
+|                     |                  |
+|   n:undefined       |                  | 
+|   func: {...}       |                  |
+|   square2:undefined |         CODE     |
+|   square4:undefined |                  |
+-------------------------------------------
+
+Memory creation phase-----
+
+It goes to line one, and allocates a memory space for variable 'n' and then goes to line two, and allocates memory space for function 'square'. When allocating memory for n it stores 'undefined', For 'square', it stores the whole code of the function inside its memory space. Then, as square2 and square4 are variables as well, it allocates memory and stores 'undefined' for them, and this is the end of first phase i.e. memory creation phase.
+
+code execution phase-----
+
+ It starts going through the whole code line by line. As it encounters var n = 2, it assigns 2 to 'n'. Until now, the value of 'n' was undefined.
+
+ For line 2-5, there is nothing to execute. As these lines were already dealt with in memory creation phase.
+
+ line 6 i.e. var square2 = square(n);, here functions are a bit different than any other language. A new execution context is created altogether (STACK FRAME). In this new execution context, in memory creation phase, we allocate memory to num and ans the two variables. And undefined is placed in them.
+
+ In code execution phase of this execution context, first 2 is assigned to num. Then var ans = num * num will store 4 in ans. After that, return ans returns the control of program back to where this function was invoked from.
+
+-------------------------------------
+ JS maintains a CallStack.
+----------------------------------

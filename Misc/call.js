@@ -18,7 +18,7 @@ let obj2 = {
 
 //We want to use printFullName() for obj2
 
-obj1.printFullName.call(obj2) //call(ref) ref-> with we want "this" to be binded with
+obj1.printFullName.call(obj2) //call(ref) ref-> with which we want "this" to be binded with
 //John Doe
 
 //func.call(context, arg1, arg2, ...)
