@@ -1,0 +1,117 @@
+Closures:
+
+JS has a lexcial scope environment. If a function needs to access a variable, it first goes to its local memory. When it does not find it there, it goes to the memory of its lexical parent. 
+
+function x() {
+    var a = 7;    
+    function y() {
+        console.log(a);
+    }
+    y();
+}
+x();
+
+/*OUTPUT: 7*/
+
+=> function y along with its lexical scope (function x) would be called a closure.
+
+
+A function bind together with its lexical scope environment is called closure.
+
+** In javascript, we can pass a function as a parameter to a function and also we can return a function.
+
+ex-
+
+function x() {
+    var a = 7;    
+    function y() {
+        console.log(a);
+    }
+    
+    return y; //we are returning a function
+
+}
+
+var z=x();
+
+console.log(z); // z has the function y
+
+//OUTPUT-
+// function y() {
+        console.log(a);
+    }
+
+// later in the code when we invoke z
+
+z(); //output-> 7
+
+Logically, x() ==returned== function y, so it is not in the scope of function x so function y doesnt know if "var a" exists.
+
+But we still get the output 7
+
+Reason- x() not only returned the function but also its lexical environment (i.e, it returned a closure, so y() can still access var a. it stores the "reference to var a")
+
+
+
+setTimeout + closures-
+
+
+function x() {
+    var i=1;
+
+    setTimeout(function () {
+        console.log(i);
+    },3000);
+
+    console.log("Hi");
+}
+
+x(); 
+
+Output->
+Hi
+1
+
+setTimeout doesnt block the the code, the function in the setTimeout forms a closure, sp this function remembers the reference to variable i.
+
+setTimeout takes this callback function, stores it somewhere and attaches a timer of 3s to it. When the timer runs out the callback is pushed into the CallStack and is invoked.
+
+While the timer is running js continues to execute the next line of code.
+
+
+print 1 to 5 after every second-
+
+function x() {
+
+    for(var i=1; i<=5;i++)
+    {
+        setTimeout(function() {
+            console.log(i);
+        }, i*1000); 
+    }
+
+    console.log("Hi");
+}
+x();
+
+//OUTPUT-
+Hi
+6
+6
+6
+6
+6
+
+Reason- 
+The callback function remembers the reference to variable i.
+so for each iteration a copy of this callback function is created and stored somewhere. Note that all the functions will store the reference to same variable i (closure).
+
+js keeps on running the loop as it would not wait for callback. when timer expires value of i will be updated to 6.
+
+therefore, all the 5 functions return 6
+
+
+Solution- 
+Use 'let' instead of 'var'. 
+
+We know that let is block scoped so for each iteration each block will have different memory space to i, and the respective functions will store the reference to their respective memory space. Hence, all i's are diff this time

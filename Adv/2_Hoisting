@@ -1,0 +1,51 @@
+
+-------------------------------------------------------------
+getName();
+console.log(x);
+
+var x = 7;
+function getName() {
+ console.log("Namaste Javascript");
+}
+
+------------------------------
+Output: Namaste Javascript
+        undefined
+--------------------------------------------------------------
+
+It should have been an outright error in many other languages, as it is not possible to even access something which is not even created (defined) yet. 
+However, JS executed the function and printed undefined
+
+We know that in memory creation phase it assigns undefined and puts the content of function to memory. 
+
+Now it goes line by line in code execution phase. 
+
+It encounters getName() -> Stack frame created and executed.
+
+It encounters console.log(x); -> Currently in variable environment x's value is undefined therefore, it prints undefined.
+
+It encounters x=7 -> Now, it assigns x=7;
+
+and so on.
+
+
+
+If "getName" is declared as an arrow function (var getName = () => {...}) or like this,
+
+var getName = function () {
+ ...
+}
+
+then "getName" is just like any other variable. i.e, it is assigned undefined in memory creation phase rather than copying function code.
+
+Therefore, 
+----------------------------------------------------------------
+console.log(getName) //output: undefined
+
+getName(); //output: Uncaught TypeError: getName is not a function
+
+var getName = () => {
+ console.log("Hello!");
+}
+----------------------------------------------------------------------------
+

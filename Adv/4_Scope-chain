@@ -1,0 +1,76 @@
+
+An inner function can access variables which are in outer functions even if inner function is nested deep. In any other case, a function can't access variables not in its scope.
+
+
+JS has a lexcial scope environment. If a function needs to access a variable, it first goes to its local memory. When it does not find it there, it goes to the memory of its lexical parent. This process/ chain of lexical environment and tehir parent reference is called SCOPE CHAINING. 
+
+e.g-
+
+function a() {
+   var b=10;
+   c();
+
+   function c() {
+    ---
+    }
+
+}
+
+a();
+
+
+//Behind the scene:
+
+-> Call stack created
+-> GEC stack frame pushed
+
+GEC stack frame
+
+Memory:         code:
+a: {...}
+
+**reference to 
+parent lexcial 
+environment (here, NULL)
+
+
+-> a() is called
+
+Memory:         code:
+b: 10
+
+c: {...}
+
+**reference to 
+parent lexcial 
+environment (here, GEC frame)
+
+
+-> c() is called
+
+Memory:         code:
+
+**reference to 
+parent lexcial 
+environment (here, a frame)
+
+
+CALL STACK
+
+|           |
+|           |
+|           |
+|           |
+|---------- |
+|     c()   |------ reference
+|---------- |     |
+|    a()    |<----|
+|---------- |     |
+|   GEC     |<----|
+------------      |  
+    NULL     <----|
+
+
+
+
+

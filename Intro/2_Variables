@@ -26,6 +26,11 @@ A repeated declaration of the same variable is an error:
     let message = "That"; // SyntaxError: 'message' has already been declared
 
 
+//const has to be initialized at the same time of declaration;
 
+const b;
+b=100; //Error
+
+const b=100;
 
 

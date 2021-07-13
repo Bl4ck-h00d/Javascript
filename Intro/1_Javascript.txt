@@ -20,3 +20,5 @@ dynamic -> Not precompiled instead parsed and compiled on the fly. Code is evalu
 weakly typed -> data types are assumed automatically. we dont define data types.
 
 Javascript runs on a host environment. e.g- browser-side, server-side.  
+
+JS is a ==loosely typed language==. That is, it doesn't attach its variables to any specific datatype. One variable can hold all different types of values.
