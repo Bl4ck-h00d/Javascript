@@ -1,0 +1,31 @@
+JavaScript Runtime Environment
+It is like a big container which has all the required components to run JavaScript. 
+
+-> JS engine 
+-> web API
+-> Callback queue
+-> Microtask queue
+
+Every browser has a javascript run time environment.
+
+
+JS engine architecture
+
+Code ---> Parsing ----> Compilation ---> Execution
+
+Parsing-
+
+Code is parsed that is a "token" is generated for each line of code. Syntax parser takes the code and converts it into ==AST (Abstract syntax tree)==.
+
+
+Compilation-
+
+Initially, JS was an interpreted language but now they also use compiler depends on JS engine. Therefore, JS is called ==Just In Time Compiled language==.
+
+Interpreter-> executes the code line by line
+Compiler-> It compiles the code and optimizes it
+
+
+AST ---->Interpreter <---> Compiler---> execution + (Memory Heap + Call Stack)
+
+While the code is being interpreted line by line compiler simultaneously optimizes the code.

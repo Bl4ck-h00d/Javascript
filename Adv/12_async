@@ -1,0 +1,54 @@
+Async/Await 
+
+There is a special syntacx to work with the promises in a more comfortable fashion, called "async/await". 
+
+The keyword "async" before a function means that the function will always return a promise.  ==Other values are wrapped in a resolved promise automatically.==
+
+
+This function returns a "resolved" promise with the result of 1. 1 is automatically passed as resolved value i.e, resolve(1)
+
+```
+async function f() {
+  return 1;
+}
+
+f().then( value => console.log(value)); // 1
+```
+
+This is same as, 
+
+async function f() {
+    return Promise.resolve(1);
+}
+
+f().then( value => console.log(value));
+
+
+
+Await
+
+There’s another keyword, await, that ==works only inside async functions==
+
+The keyword await makes JavaScript wait until that promise settles and returns its result.
+
+Say, we have an async function which produces a promise inside it and whose result is required for later computation. The "await" keyword makes the JS wait till that promise is resolved.
+
+
+```
+async function f() {
+
+  let promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("done!"), 1000)
+  });
+
+  let result = await promise; // wait until the promise resolves (*)
+
+  alert(result); // "done!"
+}
+
+f();
+```
+
+The function execution “pauses” at the line (*) and resumes when the promise settles, with result becoming its result. So the code above shows “done!” in one second.
+
+It’s just a more elegant syntax of getting the promise result than promise.then
