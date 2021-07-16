@@ -1,0 +1,85 @@
+In javascript we can take a function and we can pass it into another function. This is called callback function.
+
+Callback function opens a whole new world of asynchronous in a synchronus single threaded language javascript.
+
+function x(y) {
+
+    ......
+
+    y();
+
+}
+
+x(function y() {
+
+});
+
+Why is it called callback function? that is because we are not calling function 'y' right now. We are assigining the responsibility of calling y() to another function x() at later time.
+
+example:         
+
+//setTimeout function takes a callback function in argument
+
+```
+setTimeout(function () {
+    console.log('timer');
+
+},5000);
+
+function x(y) {
+
+  console.log('x');
+  y();
+
+}
+
+x(function y() {
+    console.log('y');
+});
+
+```
+OUTPUT
+x
+y
+timer
+
+
+JavaScript has one main thread i.e, it has 1 call stack and if a function takes a lot of time to execute then it is called blocking of main thread.
+
+
+
+Using EventListener
+
+//create a function that will print no. of times a btn is clicked.
+
+```
+let count = 0;
+document.getElementById("clickMe").addEventListener("click", function () {
+    console.log("Button clicked, " ++count);
+})
+```
+
+
+//Now we want to hide the count variable coz we don't want it to be cahnged later on by some other function.
+
+//Therefore, we will use closures.
+
+```
+function attachEventListener() {
+    let count = 0;
+
+    document.getElementById("clickMe").addEventListener("click", function () {
+    console.log("Button clicked, " ++count);
+})
+
+}
+
+attachEventListener();
+```
+
+So when attachEventListener is called, it returns the closure also.
+
+
+Why do we need to remove event listeners?
+
+EventListeners are heavy that is it takes memory. When we attach a event listener it forms a closure It holds on to the memory of variables and functions (it does not frees them). It keeps on listening for the event.

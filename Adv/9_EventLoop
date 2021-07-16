@@ -1,0 +1,164 @@
+JavaScript is a synchronous, single threaded language. It has one call stack and can do one thing at a time. This call stack is present in javascript engine.
+
+```
+function a() {
+    console.log("a");
+}
+
+a();
+console.log("end");
+```
+
+
+Whenever a javascript code is executed, a GEC is created and pushed into the call stack.
+
+CALL STACK
+        ------------[GEC]
+|       |   |
+|       V   |
+|           |
+|           |
+|           |
+|           |
+|           |     
+|           |
+|---------- |     
+|   GEC     |
+------------     
+
+
+Now, it reads and executs the code in GEC line by line. 
+
+It encounters function a() {...} => Memory is allocated. 
+
+It encounters a(). A new execution context is created and pushed.
+    
+         ------------[a()]
+|        |  |
+|        V  |
+|           |
+|           |
+|           |
+|           |
+|---------- |     
+|    a()    |
+|---------- |     
+|   GEC     |
+------------        
+
+Now, a() is executed line by line, and prints "a".
+
+a() is popped
+    
+console.log("end")
+
+GEC is popped.
+
+
+
+Call stack waits for nothing whatever is pushed into the stack. It executes it immediately. But what if we want to execute something after some time. Then, we cant use call stack for that because it does has any timer.
+
+
+ call stack is in javascript engine and javascript engine is in browser. Browser has many other features like timer, bluetooth, location, local storage, etc. These are called Web API.
+
+ Browser allows us to access these features in the call stack via Global Object .
+
+Web API: (via Window object)
+
+* setTimeout
+* DOM API (ex- getElementById etc)
+* fetch()
+* localStorage
+* console
+* location
+
+
+
+
+```
+console.log("start");
+
+setTimeout(function cb() {
+    console.log("callback");
+},5000);
+
+console.log("end");
+
+```
+
+-> GEC is pushed in callstack
+-> console.log("start") => console api is called via window object
+
+-> setTimeout(function cb() {...},5000);
+        |
+        --> a timer of 5s is set via setTimeout api and cb() is stored in some memory. 
+
+        -> cb() is not pushed in callstack yet.
+
+-> console.log("end"); => console api is called via window object.
+
+[GEC] is popped
+=>Call stack empty
+
+CALL STACK
+        
+|           |
+|           |
+|           |
+|           |
+|           |
+|           |
+|           |     
+|           |
+|           |     
+|           |
+------------     
+
+
+
+timer of 5s is over---> Now, cb() is pushed in =="callback queue"==
+
+CALL BACK QUEUE
+--------------------------------------
+|       |
+| cb()  |
+|       |
+--------------------------------------
+
+
+
+=> Event Loop is like a gatekeeper, It checks if there is something in the callback queue, it pushes it into the stack. 
+
+
+
+CALL STACK
+        
+|           |
+|           |
+|           |
+|           |
+|           |
+|           |
+|           |     
+|           |
+|---------- |     
+|    cb()   |----------> console API
+------------   
+        /\    
+        |
+        |
+        |                                     Timer=5s  
+    EVENT LOOP                                Memory -> cb()                 
+        /\    
+        |                                     Timer=0s => cb()---------- 
+        |                                                               |
+        |                                                               |
+        |                                                               |
+        |         CALL BACK QUEUE                                       |
+        |       --------------------------------------                  |
+        ------->|       |                                cb() push<-----|
+                | cb()  |
+                |       |
+                --------------------------------------
+
+=> Now, cb() is pushed into the stack and executed.
