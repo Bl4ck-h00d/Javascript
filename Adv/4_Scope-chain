@@ -1,3 +1,11 @@
+We define "scope" as the set of rules that govern how the Engine can look up a variable by its identifier name and find it, either in the current Scope, or in any of the Nested Scopes it's contained within.
+
+
+There are two predominant models for how scope works. 
+-> Lexical scope
+-> Dynamic scope
+
+
 
 An inner function can access variables which are in outer functions even if inner function is nested deep. In any other case, a function can't access variables not in its scope.
 

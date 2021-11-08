@@ -13,6 +13,24 @@ JS engine architecture
 
 Code ---> Parsing ----> Compilation ---> Execution
 
+
+
+JavaScript falls under the general category of "dynamic" or "interpreted" languages, it is in fact a compiled language. It is not compiled well in advance, as are many traditionally-compiled languages, nor are the results of compilation portable among various distributed systems.
+
+
+In a traditional compiled-language process, a chunk of source code, your program, will undergo typically three steps before it is executed, roughly called "compilation":
+
+
+-> Tokenizing/Lexing: breaking up a string of characters into meaningful (to the language) chunks, called tokens. For instance, consider the program: var a = 2;. This program would likely be broken up into the following tokens: var, a, =, 2, and ;. Whitespace may or may not be persisted as a token, depending on whether it's meaningful or not.
+
+
+-> Parsing: taking a stream (array) of tokens and turning it into a tree of nested elements, which collectively represent the grammatical structure of the program. This tree is called an "AST" (Abstract Syntax Tree).
+
+-> Code-Generation: the process of taking an AST and turning it into executable code. Take our above described AST for var a = 2; and turn it into a set of machine instructions to actually create a variable called a (including reserving memory, etc.), and then store a value into a.
+
+
+
+
 Parsing-
 
 Code is parsed that is a "token" is generated for each line of code. Syntax parser takes the code and converts it into ==AST (Abstract syntax tree)==.
@@ -29,3 +47,35 @@ Compiler-> It compiles the code and optimizes it
 AST ---->Interpreter <---> Compiler---> execution + (Memory Heap + Call Stack)
 
 While the code is being interpreted line by line compiler simultaneously optimizes the code.
+
+Any snippet of JavaScript has to be compiled before (usually right before!) it's executed. So, the JS compiler will take the program var a = 2; and compile it first, and then be ready to execute it, usually right away.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+Working of engine-
+
+Engine- responsible for start-to-finish compilation and execution of our JavaScript program.
+
+
+Compiler-one of Engine's friends; handles all the dirty work of parsing and code-generation.
+
+
+Scope-  another friend of Engine; collects and maintains a look-up list of all the declared identifiers (variables), and enforces a strict set of rules as to how these are accessible to currently executing code.
+
+
+
+var a = 2;
+
+Engine and friends dont see it as one statement. Engine sees 2 distinct statements one which compiler will handle during compilation and one which engine will handle during execution.
+
+The first thing Compiler will do with this program is perform lexing to break it down into tokens, which it will then parse into a tree. But when Compiler gets to code-generation, it will treat this program somewhat differently than perhaps ===assumed===.
+
+Assumption-> A reasonable assumption would be that Compiler will produce code that could be summed up by this pseudo-code: "Allocate memory for a variable, label it a, then stick the value 2 into that variable." Unfortunately, that's not quite accurate.
+
+Instead, 
+
+1. Encountering var a, Compiler asks Scope to see if a variable a already exists for that particular scope collection. If so, Compiler ignores this declaration and moves on. Otherwise, Compiler asks Scope to declare a new variable called a for that scope collection.
+
+2. Compiler then produces code for Engine to later execute, to handle the a = 2 assignment. The code Engine runs will first ask Scope if there is a variable called a accessible in the current scope collection. If so, Engine uses that variable. If not, Engine looks elsewhere (nested Scope).
+
+If Engine eventually finds a variable, it assigns the value 2 to it. If not, Engine will raise its hand and yell out an error!

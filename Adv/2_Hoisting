@@ -49,3 +49,98 @@ var getName = () => {
 }
 ----------------------------------------------------------------------------
 
+
+When you see var a = 2;, you probably think of that as one statement. But JavaScript actually thinks of it as two statements: "var a;" and "a = 2;". The first statement, the declaration, is processed during the compilation phase. The second statement, the assignment, ===is left in place=== for the execution phase.
+
+```
+console.log( a );
+
+var a = 2;
+```
+
+This is interpreted as- 
+
+```
+var a;
+
+console.log( a );
+
+a=2;
+
+```
+
+Note: Only the declarations themselves are hoisted, while any assignments or other executable logic are left in place.
+
+
+foo();
+
+function foo() {
+	console.log( a ); // undefined
+
+	var a = 2;
+}
+
+
+interpreted as-
+
+function foo() {
+	var a;
+
+	console.log( a ); // undefined
+
+	a = 2;
+}
+
+foo();
+
+
+
+Function declarations are hoisted, as we just saw. But function expressions are not.
+
+foo(); // not ReferenceError, but TypeError!
+
+var foo = function bar() {
+	// ...
+};
+
+The variable identifier foo is hoisted and attached to the enclosing scope (global) of this program, so foo() doesn't fail as a ReferenceError. But foo has no value yet (as it would if it had been a true function declaration instead of expression). So, foo() is attempting to invoke the undefined value, which is a TypeError illegal operation.
+
+
+
+NOTE: 
+
+Functions are hoisted before the variables.
+
+Both function declarations and variable declarations are hoisted. But a subtle detail (that can show up in code with multiple "duplicate" declarations) is that functions are hoisted first, and then variables.
+
+```
+foo(); // 1
+
+var foo;
+
+function foo() {
+	console.log( 1 );
+}
+
+foo = function() {
+	console.log( 2 );
+};
+```
+
+1 is printed instead of 2! This snippet is interpreted by the Engine as:
+
+```
+function foo() {
+	console.log( 1 );
+}
+
+foo(); // 1
+
+foo = function() {
+	console.log( 2 );
+};
+```
+
+Notice that var foo was the duplicate (and thus ignored) declaration, even though it came before the function foo()... declaration, because function declarations are hoisted before normal variables.
+
+While multiple/duplicate var declarations are effectively ignored, subsequent function declarations ===do override previous functions===.

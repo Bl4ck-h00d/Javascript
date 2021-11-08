@@ -3,6 +3,7 @@
 
 // It has different values depending on where it is used:
 
+
 // In a method, this refers to the owner object.
 
 // Alone, this refers to the global object.
@@ -14,6 +15,108 @@
 // In an event, this refers to the element that received the event.
 
 // Methods like call(), and apply() can refer this to any object.
+
+
+// NOTE :
+// To understand this binding, we have to understand the call-site: the location in code where a function is called (not where it's declared).
+//Dosent matter where the function is declared, it depends on the context in which the function is invoked.
+
+function foo() {
+	console.log( this.a );
+}
+
+var a = 2;
+
+foo(); //2
+
+//foo() is being invoked in the global scope hence "this" will bind to global object.(default binding)
+
+
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+obj.foo(); // 2 //invoked in obj context (Implicit binding)
+foo(); //undefined  //invoked in global context
+
+//Dosent matter where the function is declared, it depends on the context in which the function is invoked.
+
+
+// Only the top/last level of an object property reference chain matters to the call-site. For instance:
+
+function foo() {
+	console.log( this.a );
+}
+
+var obj2 = {
+	a: 42,
+	foo: foo
+};
+
+var obj1 = {
+	a: 2,
+	obj2: obj2
+};
+
+obj1.obj2.foo(); // 42
+
+
+
+
+
+
+
+// One of the most common frustrations that this binding creates is when an ==implicitly bound function== loses that binding, which usually means it falls back to the default binding, of either the global object or undefined, depending on strict mode.
+
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+var bar = obj.foo; // function reference/alias!
+
+var a = "oops, global"; // `a` also property on global object
+
+bar(); // "oops, global"
+
+// NOTE 
+//Even though bar appears to be a reference to obj.foo, 
+// in fact, it is really just another reference to ==foo== itself. Moreover, the call-site is what matters, and the call-site is bar(), which is a plain, un-decorated call and thus the default binding applies.
+
+// The more subtle, more common, and more unexpected way this occurs is when we consider passing a ==callback function==:
+
+function foo() {
+	console.log( this.a );
+}
+
+function doFoo(fn) {
+	// `fn` is just another reference to `foo` not obj.foo (i.e, foo with obj context)
+
+	fn(); // <-- call-site!
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+var a = "oops, global"; // `a` also property on global object
+
+doFoo( obj.foo ); // "oops, global"
+
+
+
+// Explicit Binding- forcing the binding using call(), apply(), bind()
+
 
 //---------------------------------------------------------------------------------------
 

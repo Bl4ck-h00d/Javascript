@@ -1,4 +1,5 @@
 Closures:
+Closure is when a function is able to remember and access its lexical scope even when that function is executing outside its lexical scope.
 
 JS has a lexcial scope environment. If a function needs to access a variable, it first goes to its local memory. When it does not find it there, it goes to the memory of its lexical parent. 
 

@@ -3,7 +3,7 @@ Everything in JS happens inside the execution context. Imagine a sealed-off cont
 
 Variable Environment     Thread of execution
 -------------------------------------
-        Memory    |  Code
+        Memory    |  Code            |
 -------------------------------------
 | key:value       |                  |
 |                 |                  |
@@ -33,7 +33,7 @@ Single-threaded: Execution happens on a single thread only.A thread is a path of
 
 Code Execution:
 
-When a JS program is ran, a ==global== execution context is created.
+When a JS program is run, a ==global== execution context is created.
 
 The execution context is created in two phases. The creation phase/ memory creation phase and code execution phase.
 

@@ -46,3 +46,23 @@ console.log(a); //10
 //In the above example, variable 'a' which is outside the block scope is "Shadowed" by the 'a' in the Block and also this 'a' modifies the value of outter 'a' variable as they are pointing to same memory space.
 
 //Shadowing works in similar way in a function (arrow func too)
+
+// NOTE
+// "var" has function level scope not block level scope.
+
+var a =100;
+console.log(a); //100
+
+function task() {
+    var a=200;
+    console.log(a); //200  <--------
+
+    if(true) {
+        var a=300;  // <--------------  both "a" are same (no block scope)
+        console.log(a); //300
+    }
+
+    console.log(a); //300
+}
+
+console.log(a); //100
