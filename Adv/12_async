@@ -34,6 +34,18 @@ The keyword await makes JavaScript wait until that promise settles and returns i
 Say, we have an async function which produces a promise inside it and whose result is required for later computation. The "await" keyword makes the JS wait till that promise is resolved.
 
 
+
+async function api() {
+  console.log(1)
+  console.log(2)
+
+  const result = await axios.get('https;//ksjdflkjsadk.com/someklkd');
+
+  result = result.json()
+
+  return result;
+}
+
 ```
 async function f() {
 

@@ -4,6 +4,7 @@
 
 // The constructor syntax for a promise object is:
 
+
 let promise = new Promise(executor);
 // The function passed to new Promise is called the executor. When new Promise is created, the executor runs automatically. 
 
@@ -98,11 +99,12 @@ promiseObj.then(
 
         //Do some computatiion
         //A result is generated--> value
-
+       
+        let value = 10;
         resolve(value);
 
     },1000);
-})
+ })
 
 
 promiseObj

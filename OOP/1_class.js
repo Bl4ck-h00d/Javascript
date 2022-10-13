@@ -57,7 +57,10 @@ class User {
 // It is used to initialize object properties
 // If you do not define a constructor method, JavaScript will add an empty constructor method.
 
+//We dont write let/const/var for data members
 class Car {
+  name;
+  year;
   constructor(name, year) {
     this.name = name;
     this.year = year;
@@ -79,3 +82,38 @@ class User {
 // -> Creates a function named User, that becomes the result of the class declaration. The function code is taken from the constructor method (assumed empty if we don’t write such method).
 
 // -> Stores class methods, such as sayHi, in User.prototype.
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------
+
+// Just like functions, classes can be defined inside another expression, passed around, returned, assigned, etc.
+
+//Valid syntax
+
+let User = class {
+  sayHi() {
+    alert("Hello");
+  }
+};
+
+function makeClass(phrase) {
+  // declare a class and return it
+  return class {
+    sayHi() {
+      alert(phrase);
+    }
+  };
+}
+
+// Create a new class
+let User = makeClass("Hello");
+
+new User().sayHi(); // Hello
+
+
+
+/** 
+ * NOTE- On instantiating a new object class adds "constructor and methods" to its prototypes, data fields are not added 
+ * 
+*/

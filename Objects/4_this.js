@@ -21,6 +21,15 @@
 // To understand this binding, we have to understand the call-site: the location in code where a function is called (not where it's declared).
 //Dosent matter where the function is declared, it depends on the context in which the function is invoked.
 
+
+/**
+ * 
+ * Note- Function scope/closure=> depends where function is declared
+ *		"this"-> depends where function is called 
+ *
+ * 
+ *  */
+
 function foo() {
 	console.log( this.a );
 }
@@ -185,7 +194,7 @@ obj2.bike();      // "Gixxer"
 
 // The call() and apply() methods are predefined JavaScript methods.
 
-// They can both be used to call an object method with another object as argument.
+// They can both be used to call an object "method" with another object as argument.
 
 // In the example below, when calling person1.fullName with person2 as argument, this will refer to person2, even if it is a method of person1:
 
@@ -199,6 +208,16 @@ var person2 = {
   lastName: "Doe",
 }
 person1.fullName.call(person2);  // Will return "John Doe"
+
+/**
+ * NOTE-
+ * 	Obj1.method.call() -> same as Obj1.method()
+ * 
+ * 	Obj1.method.call(Obj2) -> bind "this" to Obj2 => if method has some code that accesses this.someValue it will now look for "someValue in Obj2"
+ * 
+ * 	Obj1.method.call(Obj2,a,b,c) -> a,b,c => args for method
+ * 
+ *  */
 
 
 // Summary-
@@ -219,6 +238,11 @@ person1.fullName.call(person2);  // Will return "John Doe"
 //----------------------------------------------------------------
 
 //"this" in arrow functions
+
+/**
+ * We know that this depends on call site of function not where it is declared. But in case of arrow function it is other way around.
+ * 
+ */
 
 // Arrow functions do not bind their own this, instead, they inherit the one from the parent scope, which is called "lexical scoping". 
 
